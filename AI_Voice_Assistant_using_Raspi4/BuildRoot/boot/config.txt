@@ -1,0 +1,8 @@
+enable_uart=1
+kernel=u-boot.bin
+arm_64bit=1
+dtoverlay=disable-bt
+dtoverlay=uart0
+gpu_mem=512
+force_turbo=1
+avoid_warnings=1
