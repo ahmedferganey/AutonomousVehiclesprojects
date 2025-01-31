@@ -1,0 +1,24 @@
+# Can't easily add license to rat-excludes file.
+.rat-excludes
+
+# Temporary user files.
+.gdb_history
+.gdb_out
+tags
+
+# Ignore documentation folder
+docs
+
+# Non-source files
+COMPATIBLE
+COPYING
+INSTALLING.md
+RELEASE_NOTES.md
+README.md
+Godeps.json
+.gitignore
+.travis.yml
+appveyor.yml
+bleholog
+go.mod
+go.sum
