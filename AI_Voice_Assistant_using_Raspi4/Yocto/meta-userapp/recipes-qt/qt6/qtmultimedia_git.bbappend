@@ -1,25 +1,21 @@
-# qtmultimedia_git.bbappend
+# Ensure ALSA/PulseAudio/FFmpeg backends are explicitly enabled
+#PACKAGECONFIG:append = " alsa pulseaudio ffmpeg gstreamer"
+PACKAGECONFIG:append = " alsa ffmpeg gstreamer"
+#PACKAGECONFIG[alsa] = "-alsa,-no-alsa,alsa-lib"
+PACKAGECONFIG[alsa] = "-DQT_MULTIMEDIA_ALSA=ON,-DQT_MULTIMEDIA_ALSA=OFF,alsa-lib"
+#PACKAGECONFIG[pulseaudio] = "-pulseaudio,-no-pulseaudio,pulseaudio"
+#PACKAGECONFIG[ffmpeg] = "-ffmpeg,-no-ffmpeg,ffmpeg"
+PACKAGECONFIG[ffmpeg] = "-DQT_MULTIMEDIA_FFMPEG=ON,-DQT_MULTIMEDIA_FFMPEG=OFF,ffmpeg"
+#PACKAGECONFIG[gstreamer] = "-gstreamer,-no-gstreamer,gstreamer1.0 gstreamer1.0-plugins-base"
+PACKAGECONFIG[gstreamer] = "-DQT_MULTIMEDIA_GSTREAMER=ON,-DQT_MULTIMEDIA_GSTREAMER=OFF,gstreamer1.0 gstreamer1.0-plugins-base"
 
-# Default PACKAGECONFIG settings
-# Enable ALSA, PulseAudio, libva, and VAAPI by default
-PACKAGECONFIG ??= "alsa pulseaudio libva vaapi"
+DEPENDS += " \
+    alsa-lib \
+"
 
-# ALSA configuration
-# Enables ALSA backend for audio playback
-PACKAGECONFIG[alsa] = "-DQT_FEATURE_alsa=ON,-DQT_FEATURE_alsa=OFF,alsa-lib,alsa-lib"
+# QtMultimedia requires ALSA/PulseAudio for audio playback
+#DEPENDS += " \
+#    alsa-lib \
+#    pulseaudio \
+#"
 
-# PulseAudio configuration
-# Enables PulseAudio backend for audio playback
-PACKAGECONFIG[pulseaudio] = "-DQT_FEATURE_pulseaudio=ON,-DQT_FEATURE_pulseaudio=OFF,pulseaudio,pulseaudio"
-
-# libva configuration
-# Enables libva for hardware-accelerated video decoding
-PACKAGECONFIG[libva] = "-DQT_FEATURE_libva=ON,-DQT_FEATURE_libva=OFF,libva,libva"
-
-# VAAPI configuration
-# Enables VAAPI for hardware-accelerated video decoding
-PACKAGECONFIG[vaapi] = "-DQT_FEATURE_vaapi=ON,-DQT_FEATURE_vaapi=OFF,libva-vaapi,libva-vaapi"
-
-# Optional: GStreamer configuration
-# Enables GStreamer backend for multimedia playback
-PACKAGECONFIG[gstreamer] = "-DQT_FEATURE_gstreamer=ON,-DQT_FEATURE_gstreamer=OFF,gstreamer1.0,gstreamer1.0"
