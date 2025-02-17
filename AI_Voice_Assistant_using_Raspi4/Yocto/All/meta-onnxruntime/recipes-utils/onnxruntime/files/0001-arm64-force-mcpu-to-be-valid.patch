@@ -1,0 +1,50 @@
+From 69d5aa765d92101ffeb018df31a255b1afc4753a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Cl=C3=A9ment=20P=C3=A9ron?= <peron.clem@gmail.com>
+Date: Thu, 20 Jun 2024 11:54:03 +0200
+Subject: [PATCH] arm64: force -mcpu to be valid
+
+Upstream-Status: Submitted [https://github.com/microsoft/onnxruntime/pull/21117]
+---
+ cmake/onnxruntime_mlas.cmake | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
+
+diff --git a/cmake/onnxruntime_mlas.cmake b/cmake/onnxruntime_mlas.cmake
+index 0ba4694c32..5003ef7f33 100644
+--- a/cmake/onnxruntime_mlas.cmake
++++ b/cmake/onnxruntime_mlas.cmake
+@@ -368,7 +368,7 @@ else()
+           ${MLAS_SRC_DIR}/sqnbitgemm_kernel_neon_int8.cpp
+         )
+         set_source_files_properties(${MLAS_SRC_DIR}/sqnbitgemm_kernel_neon_int8.cpp
+-                                    PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+dotprod")
++                                    PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+dotprod -march=armv8.2-a+dotprod")
+         if (NOT APPLE)
+           set(mlas_platform_srcs
+             ${mlas_platform_srcs}
+@@ -385,15 +385,15 @@ else()
+             ${MLAS_SRC_DIR}/sbgemm_kernel_neon.cpp
+             ${MLAS_SRC_DIR}/fp16_neon_common.cpp
+           )
+-          set_source_files_properties(${MLAS_SRC_DIR}/aarch64/HalfGemmKernelNeon.S PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+fp16 ")
+-          set_source_files_properties(${MLAS_SRC_DIR}/aarch64/QgemmS8S8KernelSmmla.S PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+i8mm ")
+-          set_source_files_properties(${MLAS_SRC_DIR}/aarch64/QgemmU8X8KernelUmmla.S PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+i8mm ")
+-          set_source_files_properties(${MLAS_SRC_DIR}/aarch64/SbgemmKernelNeon.S PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+bf16 ")
+-          set_source_files_properties(${MLAS_SRC_DIR}/activate_fp16.cpp PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+fp16 ")
+-          set_source_files_properties(${MLAS_SRC_DIR}/dwconv.cpp PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+fp16 ")
+-          set_source_files_properties(${MLAS_SRC_DIR}/pooling_fp16.cpp PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+fp16 ")
+-          set_source_files_properties(${MLAS_SRC_DIR}/sbgemm_kernel_neon.cpp PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+bf16 ")
+-          set_source_files_properties(${MLAS_SRC_DIR}/fp16_neon_common.cpp PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+fp16 ")
++          set_source_files_properties(${MLAS_SRC_DIR}/aarch64/HalfGemmKernelNeon.S PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+fp16 -march=armv8.2-a+fp16 ")
++          set_source_files_properties(${MLAS_SRC_DIR}/aarch64/QgemmS8S8KernelSmmla.S PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+i8mm -march=armv8.2-a+i8mm ")
++          set_source_files_properties(${MLAS_SRC_DIR}/aarch64/QgemmU8X8KernelUmmla.S PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+i8mm -march=armv8.2-a+i8mm ")
++          set_source_files_properties(${MLAS_SRC_DIR}/aarch64/SbgemmKernelNeon.S PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+bf16 -march=armv8.2-a+bf16 ")
++          set_source_files_properties(${MLAS_SRC_DIR}/activate_fp16.cpp PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+fp16 -march=armv8.2-a+fp16 ")
++          set_source_files_properties(${MLAS_SRC_DIR}/dwconv.cpp PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+fp16 -march=armv8.2-a+fp16 ")
++          set_source_files_properties(${MLAS_SRC_DIR}/pooling_fp16.cpp PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+fp16 -march=armv8.2-a+fp16 ")
++          set_source_files_properties(${MLAS_SRC_DIR}/sbgemm_kernel_neon.cpp PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+bf16 -march=armv8.2-a+bf16 ")
++          set_source_files_properties(${MLAS_SRC_DIR}/fp16_neon_common.cpp PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+bf16 -march=armv8.2-a+fp16 ")
+         endif()
+ 
+         if(ONNXRUNTIME_MLAS_MULTI_ARCH)
+
+
