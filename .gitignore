@@ -1,2 +1,62 @@
+# Yocto build directories
 /AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/
 /AI_Voice_Assistant_using_Raspi4/Yocto/build/
+
+# Temporary files
+New Text Document.txt
+
+# Zephyr SDK and toolchain
+PQC_for_Secure_Automotive_Communication_on_RISC_V/zephyr-sdk-0.17.0/
+PQC_for_Secure_Automotive_Communication_on_RISC_V/zephyr-sdk-0.17.0_linux-x86_64.tar.xz
+PQC_for_Secure_Automotive_Communication_on_RISC_V/toolchain/
+
+# Python virtual environments and cache
+PQC_for_Secure_Automotive_Communication_on_RISC_V/zephyr/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/.Python
+**/env/
+**/venv/
+**/ENV/
+**/env.bak/
+**/venv.bak/
+
+# Python package directories
+**/site-packages/
+**/lib/python*/
+
+# Build artifacts
+**/build/
+**/dist/
+**/*.egg-info/
+**/.eggs/
+
+# IDE and editor files
+**/.vscode/
+**/.idea/
+**/*.swp
+**/*.swo
+**/*~
+
+# OS generated files
+**/.DS_Store
+**/.DS_Store?
+**/._*
+**/.Spotlight-V100
+**/.Trashes
+**/ehthumbs.db
+**/Thumbs.db
+
+# Log files
+**/*.log
+**/logs/
+
+# Temporary files
+**/tmp/
+**/temp/
+
+# Embedded git repositories (submodules)
+PQC_for_Secure_Automotive_Communication_on_RISC_V/MainProject/
+PQC_for_Secure_Automotive_Communication_on_RISC_V/zephyrproject/

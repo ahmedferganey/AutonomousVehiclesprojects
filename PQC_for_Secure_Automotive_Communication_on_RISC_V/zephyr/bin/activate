@@ -71,18 +71,34 @@ fi
 
 
 
-# Go Environment Setup
+# Go Environment Setup and Local Binaries and RISC-V Toolchain 
 export GOPATH=~/GitHub/personal/AutonomousVehiclesprojects/PQC_for_Secure_Automotive_Communication_on_RISC_V/go
 export PATH=$GOPATH/bin:$PATH
-alias riscv-dir='cd ~/GitHub/personal/AutonomousVehiclesprojects/PQC_for_Secure_Automotive_Communication_on_RISC_V'
 export GO111MODULE=on
 export PATH=$PATH:/home/ferganey/GitHub/personal/AutonomousVehiclesprojects/PQC_for_Secure_Automotive_Communication_on_RISC_V/go/bin
-# Local Binaries
+
+
 export PATH=$HOME/.local/bin:$PATH
-# RISC-V Toolchain 
+#export PATH=/usr/bin:$PATH
+export ZEPHYR_BASE=/home/ferganey/GitHub/personal/AutonomousVehiclesprojects/PQC_for_Secure_Automotive_Communication_on_RISC_V/zephyrproject/zephyr
+export PATH=$ZEPHYR_BASE/scripts:"$PATH" 
+
 export PATH=/home/ferganey/GitHub/personal/AutonomousVehiclesprojects/PQC_for_Secure_Automotive_Communication_on_RISC_V/riscv-toolchain/bin:$PATH
-# Zephyr Toolchain Configuration
-export ZEPHYR_TOOLCHAIN_VARIANT=cross-compile
-export CROSS_COMPILE=riscv64-unknown-elf-
-# Set up Environment Variables 
+export PATH=/home/ferganey/GitHub/personal/AutonomousVehiclesprojects/PQC_for_Secure_Automotive_Communication_on_RISC_V/riscv-toolchain/riscv64-unknown-elf/bin:$PATH
+export PATH=/home/ferganey/GitHub/personal/AutonomousVehiclesprojects/PQC_for_Secure_Automotive_Communication_on_RISC_V/riscv-toolchain/bin:$PATH
+
+# Zephyr Toolchain Configuration if you will use sdk set variaent to zephyr if custom set it to be manual
+#export ZEPHYR_TOOLCHAIN_VARIANT=custom
 export ZEPHYR_SDK_INSTALL_DIR=/home/ferganey/GitHub/personal/AutonomousVehiclesprojects/PQC_for_Secure_Automotive_Communication_on_RISC_V/zephyr-sdk-0.17.0
+#export CROSS_COMPILE=/home/ferganey/GitHub/personal/AutonomousVehiclesprojects/PQC_for_Secure_Automotive_Communication_on_RISC_V/riscv-toolchain/bin/riscv64-unknown-elf-
+#export ZEPHYR_TOOLCHAIN_PATH=/home/ferganey/GitHub/personal/AutonomousVehiclesprojects/PQC_for_Secure_Automotive_Communication_on_RISC_V/riscv-toolchain/bin
+#export TOOLCHAIN_HOME=/home/ferganey/GitHub/personal/AutonomousVehiclesprojects/PQC_for_Secure_Automotive_Communication_on_RISC_V/riscv-toolchain
+#export TOOLCHAIN_ROOT=/home/ferganey/GitHub/personal/AutonomousVehiclesprojects/PQC_for_Secure_Automotive_Communication_on_RISC_V/zephyrproject/zephyr/cmake/toolchain/custom
+##export ZEPHYR_TOOLCHAIN_PATH=/home/ferganey/GitHub/personal/AutonomousVehiclesprojects/PQC_for_Secure_Automotive_Communication_on_RISC_V/riscv-toolchain/riscv64-unknown-elf/bin
+## Set up Environment Variables 
+##export ZEPHYR_SDK_INSTALL_DIR=/home/ferganey/GitHub/personal/AutonomousVehiclesprojects/PQC_for_Secure_Automotive_Communication_on_RISC_V/zephyr-sdk-0.17.0
+
+
+# setup alias  for project
+alias zephyr-setup='riscv-dir && source ./zephyrproject/zephyr/zephyr-env.sh'
+alias riscv-dir='cd ~/GitHub/personal/AutonomousVehiclesprojects/PQC_for_Secure_Automotive_Communication_on_RISC_V'
