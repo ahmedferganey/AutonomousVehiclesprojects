@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  whisper-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        CREATE_USER: "false"  # Run as root for easier testing
+      platforms:
+        - linux/amd64  # For testing on your PC
+        # - linux/arm64  # For Raspberry Pi 4 (uncomment when building for RPi)
+    image: whisper-backend-onnx:test
+    container_name: whisper-backend-test
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_NAME=whisper-base-onnx
+      - MODELS_DIR=/app/models
+      - LOG_LEVEL=INFO
+      - ONNX_NUM_THREADS=4
+    volumes:
+      # Mount models directory (if you have converted Whisper models)
+      - ./models:/app/models:ro
+      # Mount cache directory
+      - ./cache:/app/cache
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    # Resource limits (adjust based on your system)
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 2G
+        reservations:
+          cpus: '2.0'
+          memory: 1G
+
+# Networks (optional, for more complex setups)
+networks:
+  default:
+    name: whisper-network
+

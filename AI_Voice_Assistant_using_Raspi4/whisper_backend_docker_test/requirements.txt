@@ -1,0 +1,35 @@
+# Web framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+websockets==12.0
+
+# ONNX Runtime
+# Note: onnxruntime 1.16.3 works for both x86_64 and ARM64
+onnxruntime==1.16.3
+
+# HuggingFace (for Whisper model loading and tokenization)
+transformers==4.35.2
+optimum[onnxruntime]==1.15.0
+
+# Audio processing
+numpy==1.24.3
+soundfile==0.12.1
+librosa==0.10.1
+resampy==0.4.2
+
+# Utilities
+pydantic==2.5.0
+pydantic-settings==2.1.0
+python-dotenv==1.0.0
+aiofiles==23.2.1
+requests==2.31.0
+
+# Logging and monitoring
+python-json-logger==2.0.7
+
+# Testing utilities (optional, for development)
+pytest==7.4.3
+pytest-asyncio==0.21.1
+httpx==0.25.2
+
