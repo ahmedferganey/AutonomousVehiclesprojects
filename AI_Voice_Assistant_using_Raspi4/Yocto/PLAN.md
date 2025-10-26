@@ -379,81 +379,98 @@ bitbake -c listtasks custom-ai-image | grep sdk
 cd /media/fragello/06c3ca26-00fe-4e3b-8a98-931188810fc9/00_Embedded/AutonomousVehiclesprojects/AI_Voice_Assistant_using_Raspi4
 
 # ============================================================================
-# Step 1: Fix qtquick3dphysics (CRITICAL - blocks build)
+# Step 1: Fix unavailable Qt6 packages (CRITICAL - blocks build)
 # ============================================================================
 
 cd Yocto
 
-# Remove from active config
-sed -i 's/qtquick3dphysics/# qtquick3dphysics  # Not available in Qt6.2/' Yocto_sources/poky/building/conf/local.conf
+# These packages are not available in Qt 6.2 (Kirkstone uses Qt 6.2.x)
+# Need to remove: qtquick3dphysics, qtlocation
 
-# Remove from template config
+# 1a. Remove qtquick3dphysics from configs
+sed -i 's/qtquick3dphysics/# qtquick3dphysics  # Not available in Qt6.2/' Yocto_sources/poky/building/conf/local.conf
 sed -i 's/qtquick3dphysics/# qtquick3dphysics  # Not available in Qt6.2/' configs/local.conf
 
+# 1b. Remove qtlocation from configs (appears on same line as other packages)
+sed -i 's/qtlocation /# qtlocation removed (not available in Qt 6.2) \\\n    /g' Yocto_sources/poky/building/conf/local.conf
+sed -i 's/qtlocation /# qtlocation removed (not available in Qt 6.2) \\\n    /g' configs/local.conf
+
+# 1c. Remove qtlocation from qt6-voice-assistant recipes
+cd Yocto_sources/meta-userapp/recipes-apps/qt6-voice-assistant
+for recipe in qt6-voice-assistant_1.0.0.bb qt6-voice-assistant_2.0.0.bb; do
+    sed -i 's/^    qtlocation \\$/    # qtlocation  # Not available in Qt 6.2 \\/g' "$recipe"
+done
+cd ../../../../..
+
 # Verify removal
-echo "Checking if qtquick3dphysics is removed:"
-grep -n "qtquick3dphysics" Yocto_sources/poky/building/conf/local.conf || echo "✓ Removed from active config"
-grep -n "qtquick3dphysics" configs/local.conf || echo "✓ Removed from template"
+echo "✓ Checking removed packages:"
+grep -n "qtquick3dphysics\|qtlocation" Yocto_sources/poky/building/conf/local.conf || echo "✓ All unavailable Qt6 packages removed"
 
 
 # ============================================================================
-# Step 2: Fix qt6-voice-assistant recipes (Copy source files)
+# Step 2: Fix qt6-voice-assistant recipes (Copy source files & remove Python deps)
 # ============================================================================
 
 # Navigate to recipe directory
 cd Yocto_sources/meta-userapp/recipes-apps/qt6-voice-assistant
 
-# Create files directory structure
-mkdir -p files/src
-mkdir -p files/qml  
-mkdir -p files/backend
-mkdir -p files/scripts
-mkdir -p files/resources
-mkdir -p files/tests
+# Create files directory structure if not exists
+mkdir -p files/src files/qml files/backend files/scripts files/resources files/tests
 
 # Copy source files from qt6_voice_assistant_gui project
 SOURCE_DIR="../../../../../qt6_voice_assistant_gui"
 
-# Root files
+# Copy C++ source files
+cp $SOURCE_DIR/src/*.cpp files/src/
+cp $SOURCE_DIR/src/*.h files/src/
+
+# Copy QML files
+cp $SOURCE_DIR/qml/*.qml files/qml/
+
+# Copy Python backend files
+cp $SOURCE_DIR/backend/*.py files/backend/
+cp $SOURCE_DIR/backend/requirements.txt files/backend/
+
+# Copy resources
+cp $SOURCE_DIR/resources/* files/resources/ 2>/dev/null || true
+
+# Copy root files
 cp $SOURCE_DIR/CMakeLists.txt files/
 cp $SOURCE_DIR/qml.qrc files/
-cp $SOURCE_DIR/main.cpp files/src/
+cp $SOURCE_DIR/voice-assistant.desktop files/
 
-# Backend files
-cp $SOURCE_DIR/backend/*.h files/backend/ 2>/dev/null || echo "No .h files in backend"
-cp $SOURCE_DIR/backend/*.cpp files/backend/ 2>/dev/null || echo "No .cpp files in backend"
-
-# QML files
-cp $SOURCE_DIR/qml/*.qml files/qml/ 2>/dev/null || echo "No .qml files"
-
-# Python scripts
-cp $SOURCE_DIR/scripts/*.py files/scripts/ 2>/dev/null || echo "No .py files"
-[ -f "$SOURCE_DIR/requirements.txt" ] && cp $SOURCE_DIR/requirements.txt files/scripts/
-
-# Resources
-cp $SOURCE_DIR/resources/*.svg files/resources/ 2>/dev/null || echo "No .svg files"
-cp $SOURCE_DIR/resources/*.png files/resources/ 2>/dev/null || echo "No .png files"
-
-# Desktop file (create if doesn't exist)
-if [ ! -f "files/voice-assistant.desktop" ]; then
-    cat > files/voice-assistant.desktop << 'EOF'
-[Desktop Entry]
-Type=Application
-Name=Voice Assistant
-Comment=AI Voice Assistant for Automotive
-Exec=/usr/bin/qt6-voice-assistant
-Icon=voice-assistant
-Terminal=false
-Categories=Audio;AudioVideo;Qt;
-EOF
-fi
-
-# Tests
-cp $SOURCE_DIR/tests/*.cpp files/tests/ 2>/dev/null || echo "No test files"
-[ -f "$SOURCE_DIR/tests/CMakeLists.txt" ] && cp $SOURCE_DIR/tests/CMakeLists.txt files/tests/
+# Copy tests if they exist
+cp $SOURCE_DIR/tests/*.cpp files/tests/ 2>/dev/null || true
+[ -f "$SOURCE_DIR/tests/CMakeLists.txt" ] && cp $SOURCE_DIR/tests/CMakeLists.txt files/tests/ || true
 
 echo "✓ Source files copied to recipe"
-ls -la files/
+
+# ============================================================================
+# Step 2b: Remove unavailable Python dependencies from recipes
+# ============================================================================
+
+# These Python packages don't have Yocto recipes, so comment them out
+# The Qt6 C++ app will build fine; Python backend can be added later via container/pip
+
+for recipe_file in qt6-voice-assistant_1.0.0.bb qt6-voice-assistant_2.0.0.bb; do
+    echo "Fixing $recipe_file..."
+    
+    # Comment out python3-sounddevice from DEPENDS
+    sed -i 's/^    python3-sounddevice \\$/    # python3-sounddevice  # No Yocto recipe available \\/g' "$recipe_file"
+    
+    # Comment out python3-sounddevice from RDEPENDS
+    sed -i 's/^    python3-sounddevice \\$/    # python3-sounddevice  # No Yocto recipe available \\/g' "$recipe_file"
+    
+    # Comment out python3-pyttsx3 from DEPENDS
+    sed -i 's/^    python3-pyttsx3 \\$/    # python3-pyttsx3  # No Yocto recipe available \\/g' "$recipe_file"
+    
+    # Comment out python3-pyttsx3 from RDEPENDS  
+    sed -i 's/^    python3-pyttsx3 \\$/    # python3-pyttsx3  # No Yocto recipe available \\/g' "$recipe_file"
+    
+    echo "✓ Fixed $recipe_file"
+done
+
+echo "✓ Python dependencies removed - Qt6 C++ app will build successfully"
 
 # ============================================================================
 # Step 3: Build SDK with all recipes

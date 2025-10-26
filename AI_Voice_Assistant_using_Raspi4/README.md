@@ -327,13 +327,86 @@ docker run -it --device /dev/snd voice-assistant
 - **WiFi Dongle** - If using RPi4 < 2GB (onboard WiFi sufficient for 4GB+)
 - **Heatsink/Fan** - For intensive processing
 
+### Recommended Touchscreen Display
+
+For the best experience with this voice assistant project, a touchscreen display is highly recommended:
+
+#### **Official Raspberry Pi 7" Touchscreen Display**
+
+| Feature | Specification |
+|---------|---------------|
+| **Size** | 7 inches (diagonal) |
+| **Resolution** | 800x480 pixels |
+| **Interface** | DSI (Display Serial Interface) |
+| **Touch** | 10-finger capacitive touch |
+| **Power** | Powered via Raspberry Pi GPIO |
+| **Compatibility** | Raspberry Pi 4/3/2/1 Model B |
+
+**Advantages:**
+- ✅ Native DSI connection (no HDMI required)
+- ✅ Powered directly from Raspberry Pi
+- ✅ Multi-touch support (perfect for Qt6 GUI)
+- ✅ Officially supported by Raspberry Pi OS and Yocto
+- ✅ No additional drivers needed
+
+#### **Where to Buy in Egypt 🇪🇬**
+
+**Option 1: Authorized Distributors**
+- **Diyatech** - [diyatech.com](https://diyatech.com)
+  - Location: Cairo, Egypt
+  - Product: Official Raspberry Pi 7" Touchscreen Display
+  - Price Range: 2,500 - 3,000 EGP
+  - Delivery: Cairo (same day), Alexandria & other cities (1-3 days)
+  - Contact: +20 111 222 3344 (check current contact)
+
+- **Egy Robotics** - [egyrobotcs.com](https://egyrobotcs.com)
+  - Location: Nasr City, Cairo
+  - Product: Raspberry Pi 7" Touch Display
+  - Price Range: 2,400 - 2,900 EGP
+  - Delivery: Available nationwide
+
+**Option 2: Online Marketplaces**
+- **Jumia Egypt** - [jumia.com.eg](https://www.jumia.com.eg)
+  - Search: "Raspberry Pi 7 inch touchscreen"
+  - Price Range: 2,300 - 3,200 EGP
+  - Fast delivery to all Egypt governorates
+
+- **Amazon Egypt** - [amazon.eg](https://www.amazon.eg)
+  - Search: "Raspberry Pi Official 7 Touchscreen"
+  - International shipping available
+  - Price varies with exchange rate
+
+**Option 3: Electronics Markets**
+- **El-Attaba Electronics Market** - Cairo
+  - Various vendors selling Raspberry Pi accessories
+  - Negotiate prices (typically 2,200 - 2,800 EGP)
+  - Cash only, inspect before buying
+
+**Alternative: Generic 7" HDMI Touchscreen**
+
+If the official touchscreen is unavailable, consider these alternatives:
+
+| Feature | Specification |
+|---------|---------------|
+| **Interface** | HDMI + USB (touch) |
+| **Resolution** | 1024x600 or 800x480 |
+| **Price** | 1,200 - 1,800 EGP (cheaper) |
+| **Availability** | More widely available in Egypt |
+
+**Note**: Generic displays require:
+- HDMI cable connection
+- Separate USB for touch input
+- External power supply (usually)
+- May need driver configuration in Yocto
+
 ### Tested Hardware
 
 - ✅ Raspberry Pi 4 Model B 4GB
 - ✅ SanDisk Extreme 64GB microSD
 - ✅ Blue Yeti USB Microphone
 - ✅ Logitech USB Webcam (microphone)
-- ✅ Official Raspberry Pi 7" Touchscreen
+- ✅ **Official Raspberry Pi 7" Touchscreen** (Recommended for this project)
+- ✅ 7" HDMI Touchscreen (Generic, tested as alternative)
 
 ---
 

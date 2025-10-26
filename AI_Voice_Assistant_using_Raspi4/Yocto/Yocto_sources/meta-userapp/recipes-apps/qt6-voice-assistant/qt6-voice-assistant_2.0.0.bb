@@ -10,13 +10,10 @@ DEPENDS = " \
     qtdeclarative \
     qtmultimedia \
     qtsvg \
-    qtlocation \
     qtpositioning \
     qtcharts \
     python3 \
     python3-numpy \
-    python3-sounddevice \
-    python3-pyttsx3 \
 "
 
 RDEPENDS:${PN} = " \
@@ -24,15 +21,11 @@ RDEPENDS:${PN} = " \
     qtdeclarative \
     qtmultimedia \
     qtsvg \
-    qtquickcontrols2 \
-    qtlocation \
     qtpositioning \
     qtcharts \
     python3 \
     python3-numpy \
-    python3-sounddevice \
     python3-pip \
-    python3-pyttsx3 \
     alsa-lib \
     alsa-utils \
 "
@@ -146,10 +139,6 @@ RDEPENDS:${PN} += " \
     python3-core \
     python3-modules \
     python3-numpy \
-    python3-json \
-    python3-threading \
-    python3-queue \
-    python3-datetime \
 "
 
 # Install Python requirements at runtime
