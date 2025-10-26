@@ -1,0 +1,32 @@
+[submodule "AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/poky"]
+	path = AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/poky
+	url = https://github.com/ahmedferganey/poky.git
+	branch = kirkstone-voiceassistant
+[submodule "AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/meta-openembedded"]
+	path = AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/meta-openembedded
+	url = https://github.com/ahmedferganey/meta-openembedded.git
+	branch = kirkstone-voiceassistant
+[submodule "AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/meta-raspberrypi"]
+	path = AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/meta-raspberrypi
+	url = https://github.com/ahmedferganey/meta-raspberrypi.git
+	branch = kirkstone-voiceassistant
+[submodule "AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/meta-onnxruntime"]
+	path = AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/meta-onnxruntime
+	url = https://github.com/ahmedferganey/meta-onnxruntime.git
+	branch = main
+[submodule "AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/meta-tensorflow-lite"]
+	path = AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/meta-tensorflow-lite
+	url = https://github.com/ahmedferganey/meta-tensorflow-lite.git
+	branch = main
+[submodule "AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/meta-qt6"]
+	path = AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/meta-qt6
+	url = https://github.com/YoeDistro/meta-qt6.git
+	branch = 6.2
+[submodule "AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/meta-docker"]
+	path = AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/meta-docker
+	url = https://github.com/L4B-Software/meta-docker.git
+	branch = master
+[submodule "AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/meta-virtualization"]
+	path = AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/meta-virtualization
+	url = https://git.yoctoproject.org/meta-virtualization
+	branch = kirkstone

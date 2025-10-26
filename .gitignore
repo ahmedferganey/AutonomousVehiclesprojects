@@ -594,6 +594,9 @@ scratch_*
 # Do NOT ignore this directory - submodules need to be tracked
 # AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/  ← COMMENTED OUT for submodules
 
+# But ignore backup directories created during submodule conversion
+AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources_BACKUP*/
+
 # Configuration files are copied to configs/ directory (trackable)
 # See AI_Voice_Assistant_using_Raspi4/Yocto/configs/README.md for setup instructions
 
