@@ -16,16 +16,19 @@ find_package(Qt6 6.2 REQUIRED COMPONENTS
     Qml
     Gui
     Multimedia
+    Network
+    WebSockets
     DBus
     Test
     Charts
-    Location
     Positioning
 )
 
 # Application sources
 set(APP_SOURCES
     src/main.cpp
+    src/networkmanager.cpp
+    src/networkmanager.h
     src/audioengine.cpp
     src/audioengine.h
     src/transcriptionmodel.cpp
@@ -54,6 +57,8 @@ target_link_libraries(${PROJECT_NAME}
     Qt6::Qml
     Qt6::Gui
     Qt6::Multimedia
+    Qt6::Network
+    Qt6::WebSockets
     Qt6::DBus
 )
 
