@@ -584,36 +584,18 @@ scratch_*
 !meta-userapp/
 !**/meta-userapp/**
 
-# Yocto sources - managed as submodules or ignored
-# Note: Poky and meta layers are separate git repos, should be submodules
-**/Yocto_sources/poky/
-**/Yocto_sources/meta-openembedded/
-**/Yocto_sources/meta-raspberrypi/
-**/Yocto_sources/meta-virtualization/
-**/Yocto_sources/meta-docker/
-**/Yocto_sources/meta-qt6/
-**/Yocto_sources/meta-qt5/
-**/Yocto_sources/meta-onnxruntime/
+# Yocto sources - All meta layers are git submodules (external repos)
+# Strategy: Ignore entire Yocto_sources except our custom configs
 
 # Old Yocto structure (if exists)
 **/Yocto/All/
 
-# But keep the building/conf directory (your configuration)
-!**/Yocto_sources/poky/building/
-!**/Yocto_sources/poky/building/conf/
-!**/Yocto_sources/poky/building/conf/local.conf
-!**/Yocto_sources/poky/building/conf/bblayers.conf
-!**/Yocto_sources/poky/building/conf/site.conf
+# Ignore entire Yocto_sources (contains git submodules)
+# These will be managed via .gitmodules file
+AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/
 
-# Ignore build artifacts within building
-**/Yocto_sources/**/building/tmp/
-**/Yocto_sources/**/building/sstate-cache/
-**/Yocto_sources/**/building/downloads/
-**/Yocto_sources/**/building/cache/
-**/Yocto_sources/**/building/buildhistory/
-**/Yocto_sources/**/building/workspace/
-**/Yocto_sources/**/building/pseudo/
-**/Yocto_sources/**/building/deploy/
+# Configuration files are copied to configs/ directory (trackable)
+# See AI_Voice_Assistant_using_Raspi4/Yocto/configs/README.md for setup instructions
 
 # PQC RISC-V Project - Zephyr West workspace (ignore entire workspace)
 # This is a West-managed workspace with many nested git submodules
