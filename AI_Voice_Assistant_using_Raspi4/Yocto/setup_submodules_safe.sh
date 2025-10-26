@@ -107,19 +107,24 @@ push_layer() {
         git branch -M "$branch" 2>/dev/null || git checkout -b "$branch"
     fi
     
-    echo "  Pushing to GitHub..."
-    if git push -u origin "$branch" 2>&1; then
+    echo "  Pushing to GitHub (force push - replacing fork's original history)..."
+    if git push -u origin "$branch" --force-with-lease 2>&1; then
         echo -e "${GREEN}  ✓ Pushed successfully${NC}"
     else
-        echo -e "${RED}  ✗ Push failed${NC}"
-        echo ""
-        echo "  Common issues:"
-        echo "  - Repository doesn't exist on GitHub"
-        echo "  - Authentication failed"
-        echo "  - Network issue"
-        echo ""
-        read -p "  Press Enter to retry, or Ctrl+C to abort..."
-        git push -u origin "$branch"
+        echo -e "${YELLOW}  ⚠ Force-with-lease failed, trying regular force push...${NC}"
+        if git push -u origin "$branch" --force 2>&1; then
+            echo -e "${GREEN}  ✓ Force pushed successfully${NC}"
+        else
+            echo -e "${RED}  ✗ Push failed${NC}"
+            echo ""
+            echo "  Common issues:"
+            echo "  - Repository doesn't exist on GitHub"
+            echo "  - Authentication failed"
+            echo "  - Network issue"
+            echo ""
+            read -p "  Press Enter to retry, or Ctrl+C to abort..."
+            git push -u origin "$branch" --force
+        fi
     fi
     
     cd "$PROJECT_ROOT"
