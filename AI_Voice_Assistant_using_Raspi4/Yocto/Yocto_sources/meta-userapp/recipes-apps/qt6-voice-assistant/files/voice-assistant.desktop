@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Voice Assistant
+Comment=AI Voice Assistant for Automotive
+Exec=/usr/bin/qt6-voice-assistant
+Icon=voice-assistant
+Terminal=false
+Categories=Audio;AudioVideo;Qt;
