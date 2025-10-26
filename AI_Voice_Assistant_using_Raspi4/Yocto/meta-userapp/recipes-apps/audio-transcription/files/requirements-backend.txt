@@ -1,5 +1,0 @@
-PyQt5
-sounddevice
-numpy
-openai-whisper
-onnxruntime

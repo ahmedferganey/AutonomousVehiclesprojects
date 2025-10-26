@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/">
+        <!-- Main application files -->
+        <file>qml/main.qml</file>
+        <file>qml/MainWindow.qml</file>
+        
+        <!-- Core components -->
+        <file>qml/MicrophoneButton.qml</file>
+        <file>qml/WaveformVisualization.qml</file>
+        <file>qml/StatusIndicator.qml</file>
+        <file>qml/TranscriptionView.qml</file>
+        <file>qml/SettingsPanel.qml</file>
+        <file>qml/HistoryView.qml</file>
+        
+        <!-- Feature panels -->
+        <file>qml/VoiceResponsePanel.qml</file>
+        <file>qml/NavigationPanel.qml</file>
+        <file>qml/ClimateControlPanel.qml</file>
+        <file>qml/EntertainmentPanel.qml</file>
+        <file>qml/CameraPanel.qml</file>
+        <file>qml/UserProfilePanel.qml</file>
+        <file>qml/PerformanceDashboard.qml</file>
+        
+        <!-- Resources -->
+        <file>resources/microphone-icon.svg</file>
+        <file>resources/settings-icon.svg</file>
+        <file>resources/history-icon.svg</file>
+        <file>resources/voice-assistant.png</file>
+    </qresource>
+</RCC>

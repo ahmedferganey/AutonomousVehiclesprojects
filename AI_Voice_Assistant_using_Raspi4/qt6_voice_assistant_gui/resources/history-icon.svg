@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke="#666666" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Document -->
+    <path d="M 16 8 L 40 8 L 48 16 L 48 56 L 16 56 Z" stroke-width="3"/>
+    <path d="M 40 8 L 40 16 L 48 16" stroke-width="3"/>
+    
+    <!-- Text lines -->
+    <line x1="22" y1="24" x2="42" y2="24" stroke-width="2"/>
+    <line x1="22" y1="32" x2="42" y2="32" stroke-width="2"/>
+    <line x1="22" y1="40" x2="38" y2="40" stroke-width="2"/>
+    <line x1="22" y1="48" x2="35" y2="48" stroke-width="2"/>
+  </g>
+</svg>
+

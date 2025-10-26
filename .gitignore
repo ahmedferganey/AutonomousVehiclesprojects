@@ -1,62 +1,635 @@
-# Yocto build directories
-/AI_Voice_Assistant_using_Raspi4/Yocto/Yocto_sources/
-/AI_Voice_Assistant_using_Raspi4/Yocto/build/
+###########################################
+# High-Priority Ignores (Process First)
+###########################################
+# Large SDK and toolchain directories
+zephyr-sdk-*/
+toolchain/
+zephyrproject/
 
-# Temporary files
-New Text Document.txt
+# Virtual environment directories  
+**/zephyr/lib/python*/
+**/zephyr/bin/
+site-packages/
 
-# Zephyr SDK and toolchain
-PQC_for_Secure_Automotive_Communication_on_RISC_V/zephyr-sdk-0.17.0/
-PQC_for_Secure_Automotive_Communication_on_RISC_V/zephyr-sdk-0.17.0_linux-x86_64.tar.xz
-PQC_for_Secure_Automotive_Communication_on_RISC_V/toolchain/
+###########################################
+# Git Submodules
+###########################################
+# Keep submodule references, but ignore temporary submodule files
+.git/modules/*/shallow
 
-# Python virtual environments and cache
-PQC_for_Secure_Automotive_Communication_on_RISC_V/zephyr/
+###########################################
+# Yocto Build System
+###########################################
+# Yocto build directory artifacts (for standard 'build' or 'building' directories)
+**/build/tmp/
+**/build/tmp-glibc/
+**/build/sstate-cache/
+**/build/downloads/
+**/build/cache/
+**/build/buildhistory/
+**/build/workspace/
+**/build/pseudo/
+**/build/deploy/
+
+**/building/tmp/
+**/building/tmp-glibc/
+**/building/sstate-cache/
+**/building/downloads/
+**/building/cache/
+**/building/buildhistory/
+**/building/workspace/
+**/building/pseudo/
+**/building/deploy/
+
+# Build artifacts and logs (but .conf files are kept below)
+*.log
+*.swp
+*~
+.*.swp
+.swp.*
+
+# BitBake internal files (but keep user configuration)
+**/build/.templateconf
+**/build/bitbake.lock
+**/build/bitbake-cookerdaemon.log
+**/build/cache.dat
+**/building/.templateconf
+**/building/bitbake.lock
+**/building/bitbake-cookerdaemon.log
+**/building/cache.dat
+
+# Keep conf directory but ignore some generated files
+**/build/conf/templateconf.cfg
+**/build/conf/bblayers-sample.conf
+**/build/conf/local-sample.conf
+**/building/conf/templateconf.cfg
+**/building/conf/bblayers-sample.conf
+**/building/conf/local-sample.conf
+
+# IMPORTANT: Keep local.conf and bblayers.conf (user configurations)
+!**/build/conf/local.conf
+!**/build/conf/bblayers.conf
+!**/build/conf/site.conf
+!**/build/conf/auto.conf
+!**/building/conf/local.conf
+!**/building/conf/bblayers.conf
+!**/building/conf/site.conf
+!**/building/conf/auto.conf
+
+# SDK build artifacts
+**/build/tmp/sysroots/
+**/build/tmp/sysroots-components/
+**/build/tmp/stamps/
+**/build/tmp/work/
+**/build/tmp/work-shared/
+**/building/tmp/sysroots/
+**/building/tmp/sysroots-components/
+**/building/tmp/stamps/
+**/building/tmp/work/
+**/building/tmp/work-shared/
+
+# Package feeds
+**/build/tmp/pkgdata/
+**/building/tmp/pkgdata/
+
+###########################################
+# Meta Layers - Keep Custom Recipes
+###########################################
+# Keep ALL meta-* layers (custom and modified ones)
+# Only ignore build artifacts within them
+
+# Ignore compiled Python files in meta layers
 **/__pycache__/
-**/*.pyc
-**/*.pyo
-**/*.pyd
-**/.Python
-**/env/
-**/venv/
-**/ENV/
-**/env.bak/
-**/venv.bak/
+*.py[cod]
+*$py.class
 
-# Python package directories
-**/site-packages/
-**/lib/python*/
-
-# Build artifacts
-**/build/
-**/dist/
-**/*.egg-info/
-**/.eggs/
-
-# IDE and editor files
-**/.vscode/
-**/.idea/
+# Ignore vim/editor temp files in meta layers
 **/*.swp
 **/*.swo
 **/*~
 
-# OS generated files
-**/.DS_Store
-**/.DS_Store?
-**/._*
-**/.Spotlight-V100
-**/.Trashes
-**/ehthumbs.db
-**/Thumbs.db
+###########################################
+# Docker
+###########################################
+# Docker build context (keep Dockerfiles)
+**/.dockerignore
 
-# Log files
-**/*.log
-**/logs/
+# Docker volumes and runtime data
+**/docker-volumes/
+**/.docker/
 
-# Temporary files
-**/tmp/
-**/temp/
+###########################################
+# Python
+###########################################
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
-# Embedded git repositories (submodules)
-PQC_for_Secure_Automotive_Communication_on_RISC_V/MainProject/
-PQC_for_Secure_Automotive_Communication_on_RISC_V/zephyrproject/
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+**/python_build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.hypothesis/
+.pytest_cache/
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+**/site-packages/
+site-packages/
+**/lib/python*/
+**/lib64/python*/
+
+# PyCharm
+.idea/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+###########################################
+# C/C++
+###########################################
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps/
+
+# Ninja
+.ninja_deps
+.ninja_log
+
+###########################################
+# Qt/QML
+###########################################
+# Qt Creator
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.moc
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.qmlc
+*.jsc
+Makefile*
+*build-*
+*.autosave
+
+# Qt compiled files
+object_script.*.Release
+object_script.*.Debug
+*_plugin_import.cpp
+/.qmake.cache
+/.qmake.stash
+
+# Qt MOC files
+*_moc.cpp
+moc_predefs.h
+
+###########################################
+# RISC-V & Zephyr RTOS
+###########################################
+# Zephyr SDK (large precompiled toolchain)
+**/zephyr-sdk-*/
+zephyr-sdk-*/
+
+# Zephyr project workspace
+zephyrproject/
+**/zephyrproject/
+
+# Zephyr build outputs
+**/build/zephyr/
+**/build/CMakeFiles/
+**/PQC_*/build/
+**/MainProject/build/
+
+# Toolchain directories (precompiled)
+**/toolchain/
+toolchain/
+
+# Zephyr virtual environment (entire lib and bin directories)
+**/zephyr/bin/
+**/zephyr/lib/
+**/zephyr/lib64/
+**/zephyr/share/
+**/zephyr/include/
+**/zephyr/pyvenv.cfg
+zephyr/bin/
+zephyr/lib/
+zephyr/lib64/
+zephyr/share/
+zephyr/include/
+zephyr/pyvenv.cfg
+
+# Keep Zephyr source and configuration (but not venv)
+!**/zephyr/CMakeLists.txt
+!**/zephyr/prj.conf
+!**/zephyr/Kconfig
+!**/zephyr/*.overlay
+!**/zephyr/boards/
+!**/zephyr/drivers/
+!**/zephyr/src/
+!**/zephyr/scripts/
+!**/zephyr/dts/
+!**/zephyr/doc/
+
+# RISC-V Toolchain build artifacts
+**/riscv-gnu-toolchain/build/
+**/riscv-gnu-toolchain/.build/
+
+# RISC-V compiled binaries
+*.elf
+*.hex
+*.bin
+*.dump
+*.map
+
+# Spike simulator artifacts
+spike.log
+
+# West manifest workspace (if using west)
+.west/
+**/modules/
+
+###########################################
+# Build Systems
+###########################################
+# Autotools
+.deps/
+.libs/
+*.la
+*.lo
+/ar-lib
+/compile
+/config.guess
+/config.h
+/config.h.in
+/config.log
+/config.status
+/config.sub
+/configure
+/depcomp
+/install-sh
+/ltmain.sh
+/missing
+/stamp-h1
+Makefile
+Makefile.in
+/autom4te.cache/
+
+# GNU Make
+*.d
+.depend
+
+###########################################
+# IDEs and Editors
+###########################################
+# VS Code
+.vscode/
+*.code-workspace
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+Session.vim
+Sessionx.vim
+.netrwhist
+tags
+[._]*.un~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Eclipse
+.project
+.cproject
+.settings/
+.metadata/
+
+###########################################
+# Operating System Files
+###########################################
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+###########################################
+# Logs and Temporary Files
+###########################################
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+
+###########################################
+# Certificates and Keys (SECURITY)
+###########################################
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+*.jks
+*.keystore
+secrets/
+credentials/
+
+###########################################
+# Archives and Compressed Files
+###########################################
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.tar.bz2
+*.tar.xz
+*.rar
+*.7z
+*.iso
+*.img
+
+# Exception: Keep small reference archives if needed
+# !docs/*.tar.gz
+
+###########################################
+# Documentation Build Artifacts
+###########################################
+_build/
+_static/
+_templates/
+.doctrees/
+
+###########################################
+# Node.js (if used in GUI development)
+###########################################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+###########################################
+# Rust (if used in embedded components)
+###########################################
+target/
+Cargo.lock
+**/*.rs.bk
+
+###########################################
+# Custom Project-Specific
+###########################################
+# Audio test files
+*.wav
+*.mp3
+*.ogg
+*.flac
+
+# Large model files
+*.onnx
+*.pt
+*.pth
+*.h5
+*.pkl
+*.model
+
+# Test outputs
+test_output/
+test_results/
+
+# Temporary development files
+scratch/
+temp/
+todo_local.txt
+file.txt
+test.txt
+tmp.txt
+temp_*
+scratch_*
+
+###########################################
+# KEEP THESE IMPORTANT FILES
+###########################################
+# Force include important configuration files
+!local.conf
+!bblayers.conf
+!site.conf
+!layer.conf
+!*.bb
+!*.bbappend
+!*.bbclass
+!*.inc
+!README.md
+!ROADMAP.md
+!LICENSE
+!Dockerfile
+!docker-compose.yml
+!requirements.txt
+!CMakeLists.txt
+!*.cmake
+!Makefile.am
+!configure.ac
+!.gitmodules
+
+# Keep all recipe files in meta layers
+!recipes-*/**/*.bb
+!recipes-*/**/*.bbappend
+!recipes-*/**/*.bbclass
+!recipes-*/**/*.inc
+!recipes-*/**/Dockerfile
+!recipes-*/**/*.conf
+!recipes-*/**/*.service
+!recipes-*/**/*.sh
+!recipes-*/**/*.patch
+!recipes-*/**/*.diff
+
+# Keep all conf files in meta layers
+!conf/*.conf
+!conf/**/*.conf
+!conf/**/*.inc
+
+###########################################
+# IMPORTANT: Force Include Custom Directories
+###########################################
+# Qt6 Voice Assistant GUI (custom application)
+!qt6_voice_assistant_gui/
+!**/qt6_voice_assistant_gui/**
+
+# Custom meta-userapp layer
+!meta-userapp/
+!**/meta-userapp/**
+
+# Yocto sources - managed as submodules or ignored
+# Note: Poky and meta layers are separate git repos, should be submodules
+**/Yocto_sources/poky/
+**/Yocto_sources/meta-openembedded/
+**/Yocto_sources/meta-raspberrypi/
+**/Yocto_sources/meta-virtualization/
+**/Yocto_sources/meta-docker/
+**/Yocto_sources/meta-qt6/
+**/Yocto_sources/meta-qt5/
+**/Yocto_sources/meta-onnxruntime/
+
+# Old Yocto structure (if exists)
+**/Yocto/All/
+
+# But keep the building/conf directory (your configuration)
+!**/Yocto_sources/poky/building/
+!**/Yocto_sources/poky/building/conf/
+!**/Yocto_sources/poky/building/conf/local.conf
+!**/Yocto_sources/poky/building/conf/bblayers.conf
+!**/Yocto_sources/poky/building/conf/site.conf
+
+# Ignore build artifacts within building
+**/Yocto_sources/**/building/tmp/
+**/Yocto_sources/**/building/sstate-cache/
+**/Yocto_sources/**/building/downloads/
+**/Yocto_sources/**/building/cache/
+**/Yocto_sources/**/building/buildhistory/
+**/Yocto_sources/**/building/workspace/
+**/Yocto_sources/**/building/pseudo/
+**/Yocto_sources/**/building/deploy/
+
+# PQC RISC-V Project - Zephyr West workspace (ignore entire workspace)
+# This is a West-managed workspace with many nested git submodules
+# To recreate: west init -m <your-manifest-repo> && west update
+**/MainProject/
+MainProject/
+
+# If you want to track only your custom app code, uncomment below:
+# !**/MainProject/app/src/
+# !**/MainProject/app/CMakeLists.txt
+# !**/MainProject/app/prj.conf
+# !**/MainProject/app/*.c
+# !**/MainProject/app/*.h
+
+# Documentation and scripts
+!*.md
+!*.sh
+!*.py
+

@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=AI Voice Assistant
+GenericName=Voice Transcription
+Comment=AI-powered voice assistant for autonomous vehicles
+Exec=/usr/bin/VoiceAssistant
+Icon=voice-assistant
+Terminal=false
+Categories=AudioVideo;Audio;Recorder;Qt;
+Keywords=voice;assistant;transcription;speech;whisper;AI;
+StartupNotify=true
+
