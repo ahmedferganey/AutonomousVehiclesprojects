@@ -80,7 +80,7 @@ SRC_URI = " \
 
 S = "${WORKDIR}"
 
-inherit cmake_qt6
+inherit qt6-cmake
 
 # Qt6 specific configurations
 EXTRA_OECMAKE += " \
